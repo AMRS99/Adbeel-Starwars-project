@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import Card from "./Card.jsx";
+import { Context } from "../store/appContext.js";
 
 const CardList = ({array, imgURL}) =>{
-
+    const {store, action} = useContext(Context);
     return(
         <>
-            <div className="d-flex gap-3 overflow-auto">
+            <div className="row d-flex flex-nowrap overflow-auto">
                 {
                     array.map(item => {
                         return(

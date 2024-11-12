@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import rigoImage from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 import CardList from "./CardList.jsx"
+import { Context } from "../store/appContext.js";
 
 
 let characterResults= [
@@ -60,37 +61,39 @@ let characterResults= [
 	let CharactersBaseURL = "https://starwars-visualguide.com/assets/img/characters";
 	let PlanetsBaseURL = "https://starwars-visualguide.com/assets/img/planets";
 	let VehiclesBaseURL = "https://starwars-visualguide.com/assets/img/vehicles";
+export const Home = () => {
+    const {store, actions} = useContext(Context);
+    return(
+        <>
+            <div className="row">
+                <div className="col-1"></div>
 
-export const Home = () => (
-	<>
-		<div className="row">
-			<div className="col-1"></div>
+                <div className="col-10">
+                    <div className="my-5">
+                        <h1 className="text-danger">Characters</h1>
+                        <CardList 
+                            array={store.characters}
+                            imgURL={CharactersBaseURL}
+                        />
+                    </div>
+                    <div className="my-5">
+                        <h1 className="text-danger">Planets</h1>
+                        <CardList 
+                            array={store.planets}
+                            imgURL={PlanetsBaseURL}
+                        />
+                    </div>
+                    <div className="my-5">
+                        <h1 className="text-danger">Vehicles</h1>
+                        <CardList 
+                            array={store.vehicles}
+                            imgURL={VehiclesBaseURL}
+                        />
+                    </div>
+                </div>
 
-			<div className="col-10">
-				<div className="my-5">
-					<h1>Characters</h1>
-					<CardList 
-						array={characterResults}
-						imgURL={CharactersBaseURL}
-					/>
-				</div>
-				<div className="my-5">
-					<h1>Planets</h1>
-					<CardList 
-						array={characterResults}
-						imgURL={PlanetsBaseURL}
-					/>
-				</div>
-				<div className="my-5">
-					<h1>Vehicles</h1>
-					<CardList 
-						array={characterResults}
-						imgURL={VehiclesBaseURL}
-					/>
-				</div>
-			</div>
-
-			<div className="col-1"></div>
-		</div>
-	</>
-);
+                <div className="col-1"></div>
+            </div>
+        </>
+    )
+};
