@@ -1,23 +1,25 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Context } from "../store/appContext";
 
-const Card = ({ id, name, imgURL }) =>{
+const CharacterCard = ({ id, name, imgURL }) =>{
+    const {store, actions} = useContext(Context);
     return(
         <>
             <div className="card" style={{width: "18rem"}}>
                 <img 
-                    src={
-                        name==="Tatooine"
-                    ? "https://upload.wikimedia.org/wikipedia/en/6/6d/Tatooine_%28fictional_desert_planet%29.jpg"
-                    :`${imgURL}/${id}.jpg`} 
+                    src={`${imgURL}/${id}.jpg`} 
                     className="card-img-top" 
                     alt="..."
                 />
                 <div className="card-body">
-                    <h5 className="card-title">{name}</h5>
-                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <h5 className="card-title text-center">{name}</h5>
                     <div className="d-flex justify-content-between">
-                        <a href="#" className="btn btn-primary">More Information!!!</a>
-                        <button type="button" className="btn btn-outline-warning">
+                        <Link to={`/CharacterDetails/${id}`}>
+                            <button href="#" className="btn btn-primary">More Info!!!</button>
+                        </Link>
+                        <button type="button" className="btn btn-outline-warning" onClick={()=>store.favorites.push(name)}>
                             <svg 
                                 xmlns="http://www.w3.org/2000/svg" 
                                 width="16" height="16" 
@@ -34,4 +36,4 @@ const Card = ({ id, name, imgURL }) =>{
     );
 }
 
-export default Card;
+export default CharacterCard;

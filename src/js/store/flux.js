@@ -16,6 +16,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			characters:[],
 			planets:[],
 			vehicles:[],
+			singleCharacter:[],
+			singlePlanet:[],
+			singleVehicle:[],
 			favorites:[]
 		},
 		actions: {
@@ -77,6 +80,49 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({vehicles: data.results})
 				})
 				.catch(error=>{"Error:", error})
+			},
+
+
+
+			GetSingleCharacter: characterID => {
+				fetch(`https://www.swapi.tech/api/people/${characterID}`)
+				.then(response =>{
+					if(!response.ok)
+						throw new Error(response.statusText);
+					return response.json();
+				})
+				.then(data =>{
+					setStore({singleCharacter: data.result.properties})
+				})
+				.catch(error=>{"Error:", error})
+			},
+			GetSinglePlanet: planetID => {
+				fetch(`https://www.swapi.tech/api/planets/${planetID}`)
+				.then(response =>{
+					if(!response.ok)
+						throw new Error(response.statusText);
+					return response.json();
+				})
+				.then(data =>{
+					setStore({singlePlanet: data.result.properties})
+				})
+				.catch(error=>{"Error:", error})
+			},
+			GetSingleVehicle: vehicleID => {
+				fetch(`https://www.swapi.tech/api/vehicles/${vehicleID}`)
+				.then(response =>{
+					if(!response.ok)
+						throw new Error(response.statusText);
+					return response.json();
+				})
+				.then(data =>{
+					setStore({singleVehicle: data.result.properties})
+				})
+				.catch(error=>{"Error:", error})
+			},
+			DeleteFavorite: name => {
+				let newFavorites = store.favorites.filter(item => item!==name);
+				setStore({favorites: newFavorites})
 			}
 		}
 	};

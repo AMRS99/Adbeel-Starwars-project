@@ -1,16 +1,15 @@
-import React, { useContext } from "react";
-import Card from "./Card.jsx";
-import { Context } from "../store/appContext.js";
+import React from "react";
+import CharactersCard from "./CharactersCard.jsx";
 
-const CardList = ({array, imgURL}) =>{
-    const {store, action} = useContext(Context);
+const CharactersCardList = ({characters, imgURL}) =>{
+
     return(
         <>
             <div className="row d-flex flex-nowrap overflow-auto">
                 {
-                    array.map(item => {
+                    characters.map(item => {
                         return(
-                            <Card 
+                            <CharactersCard 
                                 key={item.uid}
                                 id={item.uid}
                                 name={item.name} 
@@ -22,7 +21,6 @@ const CardList = ({array, imgURL}) =>{
             </div>  
         </>
     );
-
 }
 
-export default CardList;
+export default CharactersCardList;
