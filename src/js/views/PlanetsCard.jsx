@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Context } from "../store/appContext";
 
 const PlanetsCard = ({id, name, imgURL}) => {
-
+    const {store, actions} = useContext(Context);
     return (
         <>
             <div className="card" style={{width: "18rem"}}>
@@ -22,6 +24,7 @@ const PlanetsCard = ({id, name, imgURL}) => {
                         </Link>
                         <button type="button" className="btn btn-outline-warning">
                             <svg 
+                                onClick={()=> actions.AddFavorite(id,name)}
                                 xmlns="http://www.w3.org/2000/svg" 
                                 width="16" height="16" 
                                 fill="currentColor" 

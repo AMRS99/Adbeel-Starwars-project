@@ -120,9 +120,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 				.catch(error=>{"Error:", error})
 			},
-			DeleteFavorite: name => {
-				let newFavorites = store.favorites.filter(item => item!==name);
-				setStore({favorites: newFavorites})
+			DeleteFavorite: (name) => {
+				const updateFavorite = getStore().favorites.filter(
+				  (favorite) => favorite.name != name
+				);
+				getStore().favorites = updateFavorite;
+				setStore({ favorites: updateFavorite });
+			},
+			AddFavorite: (id, name) => {
+				const favorite = {
+				  id: id,
+				  name: name,
+				};
+				const index = getStore().favorites.findIndex((fav) => fav.name == name);
+				if (index == -1) {
+				  const newFavorite = [...getStore().favorites, favorite];
+				  setStore({ favorites: newFavorite });
+				}
 			}
 		}
 	};

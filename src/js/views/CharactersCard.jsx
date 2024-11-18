@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { Context } from "../store/appContext";
+import { act } from "react-dom/test-utils";
 
 const CharacterCard = ({ id, name, imgURL }) =>{
     const {store, actions} = useContext(Context);
@@ -19,7 +20,7 @@ const CharacterCard = ({ id, name, imgURL }) =>{
                         <Link to={`/CharacterDetails/${id}`}>
                             <button href="#" className="btn btn-primary">More Info!!!</button>
                         </Link>
-                        <button type="button" className="btn btn-outline-warning" onClick={()=>store.favorites.push(name)}>
+                        <button type="button" className="btn btn-outline-warning" onClick={()=> actions.AddFavorite(id,name)}>
                             <svg 
                                 xmlns="http://www.w3.org/2000/svg" 
                                 width="16" height="16" 

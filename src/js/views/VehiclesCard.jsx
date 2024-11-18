@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Context } from "../store/appContext";
 
 const VehiclesCard = ({id, name, imgURL}) => {
-
+    const {store, actions} = useContext(Context);
     return (
         <>
             <div className="card" style={{width: "18rem"}}>
@@ -15,10 +17,11 @@ const VehiclesCard = ({id, name, imgURL}) => {
                     <h5 className="card-title text-center">{name}</h5>
                     <div className="d-flex justify-content-between">
                         <Link to={`/VehiclesDetails/${id}`}>
-                            <a href="#" className="btn btn-primary">More Info!!!</a>
+                            <button href="#" className="btn btn-primary">More Info!!!</button>
                         </Link>
                         <button type="button" className="btn btn-outline-warning">
                             <svg 
+                                onClick={()=> actions.AddFavorite(id,name)}
                                 xmlns="http://www.w3.org/2000/svg" 
                                 width="16" height="16" 
                                 fill="currentColor" 
